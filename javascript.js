@@ -1,5 +1,7 @@
 const https = require('https');
 
+const start_time = date.now();
+const player_id = ;//Somehow this has to collect a post request... Maybe server.listen?()
 
 const url1 = "https://api.clashroyale.com/v1/players/%232VL9VP8Y0/battlelog";
 
@@ -18,22 +20,54 @@ const options = {
     }
   };
 
-https.get(options, resp => {
-    let data = "";
+//obvloulst this calls the other functuons. 
+function start() {
+    
+    
+}
 
-    // A chunk of data has been recieved.
-    resp.on("data", chunk => {
-      data += chunk;
-    });
+//on start this will take the player id and will turn it into the proper format for a url header object.
+function transform(player_id){
+    return "#23" + player_id;
+    
+}
 
-    // The whole response has been received. Print out the result.
-    resp.on("end", () => {
-      //let data1 = data.slice(1, -1);
-      let url = JSON.parse(data);
-      console.log(url);
-        document.querySelector("#change").value("It worked!");
-    });
-  })
-  .on("error", err => {
-    console.log("Error: " + err.message);
-  });
+//This might return all the html or somethig like that.
+function redraw_html(){
+    
+}
+
+//This function will use the player id and make an API call and return a JSON object.
+function call_api() {
+    try{
+        https.get(options, resp => {
+            let data = "";
+            // A chunk of data has been recieved.
+            resp.on("data", chunk => {
+              data += chunk;
+            });
+
+            // The whole response has been received. Print out the result.
+            resp.on("end", () => {
+              //let data1 = data.slice(1, -1);
+              let url = JSON.parse(data);
+              //console.log(url);
+            });
+          })
+          .on("error", err => {
+            console.log("Error: " + err.message);
+          });
+        }//Try Block End
+    catch(err) {
+      console.log(err);
+        }//Catch block end.
+    
+    return url;
+}
+
+//This function will take the json object and extract the needed info and UPDATE the global variables.
+function analyise_data(json_object){
+    let wins_since_last_call = 0;
+    
+    return
+}
