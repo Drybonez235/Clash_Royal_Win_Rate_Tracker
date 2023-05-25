@@ -1,6 +1,48 @@
 <!DOCTYPE HTML>
-<title>Hello World!</title>
-<p>Hello, world!</p>
-<script src="https://extension-files.twitch.tv/helper/v1/twitch-ext.min.js"></script>
+<head>
+    <title>Clash Royal Win Rate Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="gradient">
+        <h1>Clash Royal Win Tracker</h1>
+        <div id="player_info">
+            <div id="player_name_input">
+                <p id="player">Player:<p>
+                <p id="input_name">Oxolate</p>
+            </div>
+            <div id="player_id_input">
+                <p id="player_id">Player ID:</p>
+                <input placeholder="#player tag">
+            </div>
+        </div>
+        <div id="fetched_info">
+            <div id="win_rate_input">
+                <p>Win Percentage:</p>
+                <p>0</p>
+            </div>
+            <div id="games_played_input">
+                <p>Games played:</p>
+                <p>0</p>
+            </div>
+            <div id="games_won_input">
+                <p>Games won:</p>
+                <p>0</p>
+            </div>
+            <!-- Write your comments here -->
+            <div id="time">
+                <p>start time: </p>
+                <p>10:00</p>
+            </div>
+        </div>
+    </div>
+        <div id="buttons">
+           <button type="button" id="start">Start</button>
+           <button type="button" id="refresh">Refresh</button>
+        </div>
+        
+    <script src="https://extension-files.twitch.tv/helper/v1/twitch-ext.min.js"></script>
+    <script src="javascript.js"></script>
+</body>
 
 <!-- index.html -->

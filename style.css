@@ -1,0 +1,60 @@
+@charset "utf-8";
+
+body {
+    font-family: "Roobert";
+}
+
+#gradient {
+    background-image: linear-gradient(#F0F0FF, #9146FF);*/
+    /*background: #F0F0FF;*/
+    repeat: none;
+}
+
+h1 {
+    font-size: 16pt;
+    background-color: rgb(145, 70, 255);
+    text-align: center;
+}
+
+div p {
+    display: inline;
+}
+
+#player_name_input {
+    font-size: 18pt;
+    padding: 3px;
+}
+
+#player_id_input{
+    font-size: 10pt;
+}
+
+#player_info {
+    border: 3px solid black);
+}
+
+#fetched_info {
+    font-size: 14pt;
+    margin: 3px;
+    height: 200px
+}
+
+#buttons {
+    position: absolute;
+    top: 260px;
+}
+
+#start {
+    font-size: 24px;
+    width: 100px;
+}
+
+#refresh {
+    font-size: 16px;
+}
+
+#time {
+    position: absolute;
+    top: 240px;
+}
+

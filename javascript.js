@@ -31,6 +31,7 @@ https.get(options, resp => {
       //let data1 = data.slice(1, -1);
       let url = JSON.parse(data);
       console.log(url);
+        document.querySelector("#change").value("It worked!");
     });
   })
   .on("error", err => {
