@@ -13,7 +13,8 @@
             </div>
             <div id="player_id_input">
                 <p id="player_id">Player ID:</p>
-                <input placeholder="#player tag">
+                <input id="player_id_input_field" placeholder="#player tag">
+                <br><span id="player_id_error"><span>
             </div>
         </div>
         <div id="fetched_info">
@@ -37,12 +38,12 @@
         </div>
     </div>
         <div id="buttons">
-           <button type="button" id="start">Start</button>
-           <button type="button" id="refresh">Refresh</button>
+           <button onclick="start()" id="start">Start</button>
+           <button onclick="refresh()" id="refresh">Refresh</button>
         </div>
         
     <script src="https://extension-files.twitch.tv/helper/v1/twitch-ext.min.js"></script>
-    <script src="javascript.js"></script>
+    <script src="html_javascript.js"></script>
 </body>
 
 <!-- index.html -->

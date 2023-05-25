@@ -58,3 +58,6 @@ div p {
     top: 240px;
 }
 
+#player_id_error {
+    color:red;
+}
