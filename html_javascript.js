@@ -5,7 +5,9 @@ function start() {
     let element = document.getElementById("player_id_input_field");
     let error = document.getElementById("player_id_error");
     let player_id = element.value;
-    let time = Date.now();
+    let currentDate = new Date();
+    let hours = currentDate.getHours();
+    let min = currentDate.getMinutes();
     
     if (player_id.charAt(0) != "#") {
         error.innerHTML = "Player ID must start with #";
@@ -16,6 +18,8 @@ function start() {
     else{
         element.disabled = true;
         error.innerHTML="";
+        document.getElementById("start").disabled = true;
+        document.getElementById("time_variable").innerHTML = hours + ":" + min;
         
     }
     
