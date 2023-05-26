@@ -21,6 +21,8 @@ function start() {
         document.getElementById("start").disabled = true;
         document.getElementById("time_variable").innerHTML = hours + ":" + min;
         
+        //Magic function call
+        make_get(player_id);
     }
     
    return console.log(time);
@@ -29,5 +31,19 @@ function start() {
 //This just refreshes everything. maybe
 function refresh() {
     
-    return console.log("Refresh is working");
+    return location.reload();
 }
+
+function make_get(player_id_var) {
+    //const httpRequest = new XMLHttpRequest();
+    //let host = 'http://[::]:8080';
+    //let path = '/Documents/Xcode/Clash_Royal_Win_Rate_Tracker/?';
+    //let url = host + path + player_id_var;
+    
+//    httpRequest.open("GET", url);
+//    httpRequest.send();
+//    console.log("We got to the end at least");
+    
+    
+}
+
