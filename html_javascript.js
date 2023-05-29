@@ -22,7 +22,7 @@ function start() {
         document.getElementById("time_variable").innerHTML = hours + ":" + min;
         
         //Magic function call
-        make_get(player_id);
+        make_get(player_id.slice(1));
     }
     
    return console.log(time);
@@ -30,17 +30,20 @@ function start() {
 
 //This just refreshes everything. maybe
 function refresh() {
-    
     return location.reload();
 }
 
 function make_get(player_id_var) {
     const xhttp = new XMLHttpRequest();
+    let host = "http://localhost:8080";
+    let data ="&player_id=" + player_id_var.toString();
+    
     
     xhttp.onload = function() {
-        console.log("This worked")
-        console.log(xhttp.responseText)
+        console.log("This worked");
+        console.log(xhttp.responseText);
     }
-    xhttp.open("GET", "http://localhost:8080");
-    xhttp.send();
+    xhttp.open("POST", host);
+    //xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhttp.send(data);
 }
