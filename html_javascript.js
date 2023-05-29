@@ -35,15 +35,12 @@ function refresh() {
 }
 
 function make_get(player_id_var) {
-    //const httpRequest = new XMLHttpRequest();
-    //let host = 'http://[::]:8080';
-    //let path = '/Documents/Xcode/Clash_Royal_Win_Rate_Tracker/?';
-    //let url = host + path + player_id_var;
+    const xhttp = new XMLHttpRequest();
     
-//    httpRequest.open("GET", url);
-//    httpRequest.send();
-//    console.log("We got to the end at least");
-    
-    
+    xhttp.onload = function() {
+        console.log("This worked")
+        console.log(xhttp.responseText)
+    }
+    xhttp.open("GET", "http://localhost:8080");
+    xhttp.send();
 }
-
