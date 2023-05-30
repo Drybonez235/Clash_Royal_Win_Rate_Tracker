@@ -18,23 +18,23 @@ const server = http.createServer((req, res) => {
     
     if (req.method === 'POST') {
         let body = '';
-        req.on('data', chunk => {
+        req.on(' ', chunk => {
             body += chunk.toString(); // convert Buffer to string
         });
-        req.on('end', () => {
+        req.on('end', (api_call) => {
        let body_dict = qs.parse(body);
             id = String(body_dict['player_id']);
+            console.log(id + "Does this even get called?");
             res.end('ok');
+            json = api_call(id);
         });
     } else(console.log("error"))
-    
-    json = api_call(id);
     
   res.statusCode = 200;
     res.setHeader('Content-Type','text/plain');
     res.setHeader('Access-Control-Allow-Origin', "*");
     res.setHeader('Access-Control-Allow-Methods', "OPTIONS, POST, GET");
-  res.end("Maybe");
+  res.end(json);
 });
 
 server.listen(port, hostname, () => {
@@ -64,11 +64,11 @@ server.listen(port, hostname, () => {
             resp.on("end", () => {
                 //let data1 = data.slice(1, -1);
                 let url = JSON.parse(data);
-                //console.log(url);
+                console.log(url + "this is supposed to be JSON");
+                return url;
             });
         })
         .on("error", err => {
             console.log("Error: " + err.message);
         });
-        return url;
     };
