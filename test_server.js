@@ -1,5 +1,6 @@
 const http = require('http');
-var qs = require('querystring');
+const https = require('https');
+const qs = require('querystring');
 const api_url_begin = "https://api.clashroyale.com/v1/players/";
 const api_url_end = "battlelog";
 
@@ -12,6 +13,8 @@ const port = 8080;
 
 const server = http.createServer((req, res) => {
     console.log(req.rawHeaders);
+    var id;
+    let json;
     
     if (req.method === 'POST') {
         let body = '';
@@ -19,18 +22,19 @@ const server = http.createServer((req, res) => {
             body += chunk.toString(); // convert Buffer to string
         });
         req.on('end', () => {
-        const body_dict = qs.parse(body);
+       let body_dict = qs.parse(body);
+            id = String(body_dict['player_id']);
             res.end('ok');
         });
     } else(console.log("error"))
-        
-    let json = api_call(body_dict['player_id']);
+    
+    json = api_call(id);
     
   res.statusCode = 200;
     res.setHeader('Content-Type','text/plain');
     res.setHeader('Access-Control-Allow-Origin', "*");
     res.setHeader('Access-Control-Allow-Methods', "OPTIONS, POST, GET");
-  res.end(json);
+  res.end("Maybe");
 });
 
 server.listen(port, hostname, () => {
