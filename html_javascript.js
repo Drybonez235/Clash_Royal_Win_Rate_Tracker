@@ -36,8 +36,11 @@ function refresh() {
 function make_get(player_id_var) {
     const xhttp = new XMLHttpRequest();
     let host = "http://localhost:8080";
-    let player_id_json = "{player_id :" + player_id_var.toString()+ "}";
-    
+    let data = {};
+    data["player_id"] = player_id_var.toString();
+    let json = JSON.stringify(data, null, 2);
+    console.log(data);
+    console.log(json);
     
     xhttp.onload = function() {
         console.log("This worked");
@@ -45,7 +48,7 @@ function make_get(player_id_var) {
     }
     xhttp.open("POST", host);
     xhttp.setRequestHeader("Accept", "application/json");
-    //xhttp.setRequestHeader("Content-Type", "application/json"); // You can't set content type here with out CORS freaking out.
+    xhttp.setRequestHeader("Content-Type", "application/json"); // You can't set content type here with out CORS freaking out.
     
-    xhttp.send(player_id_json);
+    xhttp.send(json);
 }
