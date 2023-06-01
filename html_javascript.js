@@ -6,6 +6,7 @@ function start() {
     let error = document.getElementById("player_id_error");
     let player_id = element.value;
     let currentDate = new Date();
+    let last_refresh_time = new Date();
     let hours = currentDate.getHours();
     let min = currentDate.getMinutes();
     
@@ -22,10 +23,9 @@ function start() {
         document.getElementById("time_variable").innerHTML = hours + ":" + min;
         
         //Magic function call
-        make_get(player_id.slice(1));
+        //For some reason we lost the string!
+        return setInterval(make_get(String(player_id.slice(1)), last_refresh_time, hours, min), 10000);
     }
-    
-   return console.log(time);
 }
 
 //This just refreshes everything. maybe
@@ -33,11 +33,12 @@ function refresh() {
     return location.reload();
 }
 
-function make_get(player_id_var) {
+function make_get(player_id_9, last_refresh_time,hours, min) {
     const xhttp = new XMLHttpRequest();
     let host = "http://localhost:8080";
     let data = {};
-    data["player_id"] = player_id_var.toString();
+    data["player_id"] = player_id.toString();
+    data["last_refresh_time"] = last_refresh_time.toString();
     let json = JSON.stringify(data, null, 2);
     console.log(data);
     console.log(json);
@@ -46,9 +47,13 @@ function make_get(player_id_var) {
         console.log("This worked");
         console.log(xhttp.responseText);
     }
+    
     xhttp.open("POST", host);
     xhttp.setRequestHeader("Accept", "application/json");
-    xhttp.setRequestHeader("Content-Type", "application/json"); // You can't set content type here with out CORS freaking out.
+    xhttp.setRequestHeader("Content-Type", "application/json");
     
     xhttp.send(json);
+    last_refresh_time = Date.now();
+    document.getElementById("last_refresh_time").innerHTML = hours + ":" + min;
 }
+

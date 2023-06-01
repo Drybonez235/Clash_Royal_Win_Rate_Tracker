@@ -14,13 +14,19 @@ const set_headers = (req, res, next) => {
     next();
 }
 
-const function1 = (req, res, next) => {
-    console.log(req.rawHeaders)
-    console.log(req.body)
-    next();
+const varify_user_id = (req, res, next) => {
+    if(String(req.body.player_id).length != 9){
+        next(error)
+    }
+    else{
+        console.log(req.rawHeaders)
+        console.log(req.body.player_id)
+        console.log(req.body.last_refresh_time)
+        next();
+    }
 }
 
-const function2 = (req, res, next) => {
+const function2 = (error, req, res, next) => {
     console.log("function 2");
     res.send('Hello World!')
 }
@@ -29,7 +35,7 @@ const function2 = (req, res, next) => {
 //app.use(bodyParser.json());
 app.use(express.json())
 app.use(set_headers)
-app.use(function1)
+app.use(varify_user_id)
 app.use(function2)
 
 app.post('/', (req, res) => {
