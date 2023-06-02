@@ -26,20 +26,32 @@ const varify_user_id = (req, res, next) => {
     }
 }
 
-const function2 = (error, req, res, next) => {
+const function2 = (req, res, next) => {
     console.log("function 2");
     res.send('Hello World!')
 }
 
+const control_flow = (req, res, next) => {
+    if (req.type == "OPTIONS"){
+        app.use(set_headers)
+        app.use(function2)
+    }
+    else{
+        app.use(express.json())
+        app.use(set_headers)
+        app.use(varify_user_id)
+        app.use(function2)
+    }
+    
+}
 //This is the order the functions will fire in.
 //app.use(bodyParser.json());
-app.use(express.json())
-app.use(set_headers)
-app.use(varify_user_id)
-app.use(function2)
+app.use(control_flow)
 
 app.post('/', (req, res) => {
-    console.log(res.json({requestBody: req.body}))
+    //console.log(res.json({requestBody: req.body}))
     });
 
 app.listen(port, () => console.log('Server ready'));
+
+

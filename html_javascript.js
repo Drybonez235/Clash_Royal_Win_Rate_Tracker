@@ -1,7 +1,8 @@
 //let name =  document.getElementById("player_id_input").innerText;
-
+let button = false;
 //This function validates the player_id input and then calls the request function with the player id and time as parametrs.
 function start() {
+    button = false;
     let element = document.getElementById("player_id_input_field");
     let error = document.getElementById("player_id_error");
     let player_id = element.value;
@@ -24,7 +25,8 @@ function start() {
         
         //Magic function call
         //For some reason we lost the string!
-        return setInterval(make_get(String(player_id.slice(1)), last_refresh_time, hours, min), 10000);
+        make_get(player_id.slice(1), last_refresh_time, hours, min);
+        button = true;
     }
 }
 
@@ -33,14 +35,13 @@ function refresh() {
     return location.reload();
 }
 
-function make_get(player_id_9, last_refresh_time,hours, min) {
+function make_get(player_id, last_refresh_time,hours, min) {
     const xhttp = new XMLHttpRequest();
     let host = "http://localhost:8080";
     let data = {};
     data["player_id"] = player_id.toString();
     data["last_refresh_time"] = last_refresh_time.toString();
     let json = JSON.stringify(data, null, 2);
-    console.log(data);
     console.log(json);
     
     xhttp.onload = function() {
@@ -53,7 +54,10 @@ function make_get(player_id_9, last_refresh_time,hours, min) {
     xhttp.setRequestHeader("Content-Type", "application/json");
     
     xhttp.send(json);
+    
     last_refresh_time = Date.now();
     document.getElementById("last_refresh_time").innerHTML = hours + ":" + min;
 }
+
+if(button){setInterval(start(), 10000)};
 
