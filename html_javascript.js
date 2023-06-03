@@ -1,35 +1,35 @@
 //let name =  document.getElementById("player_id_input").innerText;
 let button = false;
 //This function validates the player_id input and then calls the request function with the player id and time as parametrs.
-function start() {
-    button = false;
-    let element = document.getElementById("player_id_input_field");
-    let error = document.getElementById("player_id_error");
-    let player_id = element.value;
-    let currentDate = new Date();
-    let last_refresh_time = new Date();
-    let hours = currentDate.getHours();
-    let min = currentDate.getMinutes();
-    
-    if (player_id.charAt(0) != "#") {
-        error.innerHTML = "Player ID must start with #";
-    }
-    else if (player_id == "" || player_id.length != 10) {
-        error.innerHTML = "Player ID must be 9 charactors long";
-    }
-    else{
-        element.disabled = true;
-        error.innerHTML="";
-        document.getElementById("start").disabled = true;
-        document.getElementById("time_variable").innerHTML = hours + ":" + min;
+function start(){
         
-        //Magic function call
-        //For some reason we lost the string!
-        make_get(player_id.slice(1), last_refresh_time, hours, min);
-        button = true;
-    }
-}
+        let element = document.getElementById("player_id_input_field");
+        let error = document.getElementById("player_id_error");
+        let player_id = element.value;
+        let currentDate = new Date();
+        let last_refresh_time = new Date();
+        let hours = currentDate.getHours();
+        let min = currentDate.getMinutes();
+        
+        if (player_id.charAt(0) != "#") {
+            error.innerHTML = "Player ID must start with #";
+        }
+        else if (player_id == "" || player_id.length != 10) {
+            error.innerHTML = "Player ID must be 9 charactors long";
+        }
+        else{
+            element.disabled = true;
+            error.innerHTML="";
+            document.getElementById("start").disabled = true;
+            document.getElementById("time_variable").innerHTML = hours + ":" + min;
+            
+            //Magic function call
+            //For some reason we lost the string!
+            make_get(player_id.slice(1), last_refresh_time, hours, min);
+            setInterval(start, 10000)
+        }
 
+    }
 //This just refreshes everything. maybe
 function refresh() {
     return location.reload();
