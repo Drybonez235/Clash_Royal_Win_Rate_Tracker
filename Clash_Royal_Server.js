@@ -6,7 +6,7 @@ const port = 8080;
 
 
 const set_headers = (req, res, next) => {
-    res.setHeader('Content-Type','application/json'); //made a change here from  text to what it is
+    res.setHeader('Content-Type','application/json'); 
     res.setHeader('Access-Control-Allow-Origin', "*");
     res.setHeader('Access-Control-Request-Headers', '*');
     res.setHeader('Access-Control-Allow-Headers', '*');
