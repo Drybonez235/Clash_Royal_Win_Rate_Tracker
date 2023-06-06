@@ -21,10 +21,12 @@ function start(){
             document.getElementById("start").disabled = true;
             document.getElementById("time_variable").innerHTML = hours + ":" + min;
             document.getElementById("last_refresh_time").innerHTML = hours + ":" + min;
+            console.log(hours);
+            console.log(min);
             
-            //Magic function call
-            //For some reason we lost the string!
-            repeat(player_id.slice(1), currentDate, last_refresh_time, hours, min));
+            //Magic function call Finaly works!!!!
+            //setInterval(function () {make_get(player_id.slice(1), currentDate, last_refresh_time, hours, min)}, 10000);
+            make_get(player_id.slice(1), currentDate, last_refresh_time, hours, min)
         }
 
     }
@@ -33,17 +35,13 @@ function refresh() {
     return location.reload();
 }
 
-function repeat(player_id, currentDate, last_refresh_time, hours, min){
-    setInterval(make_get(player_id.slice(1), currentDate, last_refresh_time, hours, min), 10000);
-}
-
 function make_get(player_id, first_call_time, last_refresh_time, hours, min) {
     const xhttp = new XMLHttpRequest();
     let host = "http://localhost:8080";
     let data = {};
     data["player_id"] = player_id.toString();
-    data["start_time"] = first_call_time.toString();
-    data["last_refresh_time"] = last_refresh_time.toString();
+    data["start_time"] = first_call_time.toJSON();
+    data["last_refresh_time"] = last_refresh_time.toJSON();
     let json = JSON.stringify(data, null, 2);
     console.log(json);
     
