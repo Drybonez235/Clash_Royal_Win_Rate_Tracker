@@ -8,7 +8,6 @@
 
 /* Begin PBXFileReference section */
 		5D1AB1382A1FF9A2007DC94E /* html_javascript.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = html_javascript.js; sourceTree = "<group>"; };
-		5D1AB1392A251C5F007DC94E /* test_server.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = test_server.js; sourceTree = "<group>"; };
 		5D6375CE2A267D1100462675 /* Clash_Royal_Server.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Clash_Royal_Server.js; sourceTree = "<group>"; };
 		5DB54AB32A1E70F100FAA1B1 /* index.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 		5DB54AB42A1EBB7300FAA1B1 /* style.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
@@ -19,7 +18,6 @@
 			isa = PBXGroup;
 			children = (
 				5D6375CE2A267D1100462675 /* Clash_Royal_Server.js */,
-				5D1AB1392A251C5F007DC94E /* test_server.js */,
 				5D1AB1382A1FF9A2007DC94E /* html_javascript.js */,
 				5DB54AB42A1EBB7300FAA1B1 /* style.css */,
 				5DB54AB32A1E70F100FAA1B1 /* index.html */,
