@@ -69,7 +69,7 @@ const extract_data = (req, res, next) => {
     let win_total = 0;
     let game_total = 0;
     let start_time = req.body.start_time;
-    let last_refresh_time = req.body.last_refresh_time;
+    let last_refresh_time =  req.body.last_refresh_time - 600;
     console.log("start time from website: " + req.body.start_time)
     console.log("last refresh time from website: " + req.body.last_refresh_time)
     
@@ -79,13 +79,15 @@ const extract_data = (req, res, next) => {
         let current_record = req.body.Clash_Royal_Data[i];
         let your_crowns = current_record.team[0].crowns;
         let opponent_crowns = current_record.opponent[0].crowns;
-        let battle_time = current_record.battleTime.replaceAll( "T" , "" ).slice(0, 13);
+        let battle_time = current_record.battleTime.replaceAll( "T" , "" ).slice(0, 14);
         
         console.log(battle_time);
-        if((start_time < battle_time) && (last_refresh_time < battle_time)){
+        if((start_time <= battle_time) && (last_refresh_time <= battle_time)){
             game_total += 1;
+            console.log("Plus one")
             if(your_crowns > opponent_crowns){
                 win_total += 1
+                console.log("you won!")
                 }//end of win in
             }//end of time match if statment
         }//end of the for loop

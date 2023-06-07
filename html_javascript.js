@@ -1,12 +1,11 @@
 //let name =  document.getElementById("player_id_input").innerText;
 const currentDate = new Date()
-
 let games_played = 0;
 let games_won = 0;
 
-
 //This function validates the player_id input and then calls the request function with the player id and time as parametrs.
 function start(){
+    
         let element = document.getElementById("player_id_input_field");
         let error = document.getElementById("player_id_error");
         let player_id = element.value;
@@ -30,10 +29,9 @@ function start(){
             error.innerHTML="";
             document.getElementById("start").disabled = true;
             document.getElementById("time_variable").innerHTML = hours + ":" + min;
-            document.getElementById("last_refresh_time").innerHTML = hours + ":" + min;
             
             //Magic function call Finaly works!!!!
-            setInterval(function () {make_get(player_id.slice(1), currentDate_convert , hours, min)}, 120000);
+            setInterval(function () {make_get(player_id.slice(1), currentDate_convert , hours, min)}, 360000);
             //make_get(player_id.slice(1), currentDate_convert, hours, min)
         }
 
@@ -65,14 +63,14 @@ function make_get(player_id, first_call_time, hours, min) {
         document.getElementById("games_won_int").innerHTML = games_won;
         
         if(games_played != 0){
-            win_percentage = games_won/games_played;
-            document.getElementById("win_percentage").innerHTML = win_percentage;
+            win_percentage = ((games_won/games_played).toFixed(2)) * 100;
+            document.getElementById("win_percentage").innerHTML = win_percentage + "%";
         }
         console.log("start time: " + first_call_time);
         console.log("last refresh time: " + last_refresh_time_convert);
         console.log("Games Won from API call: " + response.wins);
         console.log("Games Played from API call: " + response.wins);
-    
+        document.getElementById("last_refresh_time").innerHTML = hours + ":" + min;
     }
     
     xhttp.open("POST", host);
