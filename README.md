@@ -15,8 +15,18 @@ This current version works using localhost.
   * Last Refresh time tracker
   * Reset Button
 
-## setup
+## Setup
 
-### localhost
+### Localhost and Browser
+This version runs on your local host. You will need a computer that can run a server through terminal and an internet browser. 
 ### node.js
+Node.js Version 18.16.0
+HTTPS Library
 ### Clash Royal API
+A Clash Royal Develper account to produce an API token placed as an Authorization bearer token header.
+### Instructions
+Create the required Clash Royal API token and make an API token.
+Download this repository to a folder.
+Replace the bearer message in the Clash_Royal_Server file with the API token.
+Navigate to the folder using terminal and start the node server.
+Open the HTML file in a browser, press start, and start playing Clash Royal!
