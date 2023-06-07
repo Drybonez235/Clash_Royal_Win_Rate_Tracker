@@ -1,11 +1,9 @@
-//let name =  document.getElementById("player_id_input").innerText;
 const currentDate = new Date()
 let games_played = 0;
 let games_won = 0;
 
 //This function validates the player_id input and then calls the request function with the player id and time as parametrs.
 function start(){
-    
         let element = document.getElementById("player_id_input_field");
         let error = document.getElementById("player_id_error");
         let player_id = element.value;
@@ -30,19 +28,19 @@ function start(){
             document.getElementById("start").disabled = true;
             document.getElementById("time_variable").innerHTML = hours + ":" + min;
             
-            //Magic function call Finaly works!!!!
+            //Magic function call every 6 minutes!!!!
             setInterval(function () {make_get(player_id.slice(1), currentDate_convert , hours, min)}, 360000);
-            //make_get(player_id.slice(1), currentDate_convert, hours, min)
         }
 
     }
-//This just refreshes everything. maybe
+
+//refreshes the page
 function refresh() {
     return location.reload();
 }
 
+//this function makes the post call to the server.
 function make_get(player_id, first_call_time, hours, min) {
-    
     let last_refresh_time_update = new Date();
     let last_refresh_timeJSON_update = last_refresh_time_update.toJSON().toString();
     let last_refresh_time_convert = last_refresh_timeJSON_update.replaceAll( "T","").replaceAll("-","").replaceAll(":", "").slice(0, 14);
@@ -76,7 +74,6 @@ function make_get(player_id, first_call_time, hours, min) {
     xhttp.open("POST", host);
     xhttp.setRequestHeader("Accept", "application/json");
     xhttp.setRequestHeader("Content-Type", "application/json");
-    
     xhttp.send(json);
 }
 
