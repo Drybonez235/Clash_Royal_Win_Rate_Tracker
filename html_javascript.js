@@ -19,7 +19,7 @@ function start(){
         if (player_id.charAt(0) != "#") {
             error.innerHTML = "Player ID must start with #";
         }
-        else if (player_id == "" || player_id.length != 10) {
+        else if (player_id == "" ) {
             error.innerHTML = "Player ID must be 9 charactors long";
         }
         else{
@@ -31,7 +31,7 @@ function start(){
             //Magic function call every 6 minutes!!!!
             setInterval(function () {make_get(player_id.slice(1), currentDate_convert , hours, min)}, 360000);
         }
-
+    // || player_id.length != 10) {
     }
 
 //refreshes the page

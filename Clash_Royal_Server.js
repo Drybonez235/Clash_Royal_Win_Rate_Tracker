@@ -29,7 +29,7 @@ const set_headers = (req, res, next) => {
 //This function verifies that the user id from the website is 9 digits long
 const varify_user_id = (req, res, next) => {
     if(String(req.body.player_id).length != 9){
-        // This needs to handle errors.
+        next();
     }
     else{
         next();
