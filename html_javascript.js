@@ -7,32 +7,24 @@ function start(){
         let element = document.getElementById("player_id_input_field");
         let error = document.getElementById("player_id_error");
         let player_id = element.value;
-        let last_refresh_time = new Date();
-        let last_refresh_timeJSON = last_refresh_time.toJSON().toString();
-        let last_refresh_time_convert = last_refresh_timeJSON.replaceAll( "T","").replaceAll("-","").replaceAll(":", "").slice(0, 14);
         let currentDateJSON = currentDate.toJSON().toString();
         let currentDate_convert = currentDateJSON.replaceAll( "T","").replaceAll("-","").replaceAll(":", "").slice(0, 14);
-    
-        let hours = last_refresh_time.getHours();
-        let min = last_refresh_time.getMinutes();
         
         if (player_id.charAt(0) != "#") {
             error.innerHTML = "Player ID must start with #";
         }
-        else if (player_id == "" ) {
-            error.innerHTML = "Player ID must be 9 charactors long";
+        else if (player_id == "") {
+            error.innerHTML = "Player ID can't be blank!";
         }
         else{
             element.disabled = true;
             error.innerHTML="";
             document.getElementById("start").disabled = true;
-            document.getElementById("time_variable").innerHTML = hours + ":" + min;
-            
-            //Magic function call every 6 minutes!!!!
-            setInterval(function () {make_get(player_id.slice(1), currentDate_convert , hours, min)}, 360000);
-        }
-    // || player_id.length != 10) {
-    }
+            document.getElementById("time_variable").innerHTML = currentDate.getHours() + ":" + currentDate.getMinutes();
+            //make_get(player_id.slice(1), currentDate_convert)
+            setInterval(function () {make_get(player_id.slice(1), currentDate_convert)}, 300000);
+        }//end of else block
+    }//end of start function
 
 //refreshes the page
 function refresh() {
@@ -40,8 +32,12 @@ function refresh() {
 }
 
 //this function makes the post call to the server.
-function make_get(player_id, first_call_time, hours, min) {
+function make_get(player_id, first_call_time) {
+    
     let last_refresh_time_update = new Date();
+    let hours = last_refresh_time_update.getHours();
+    let min = last_refresh_time_update.getMinutes();
+    
     let last_refresh_timeJSON_update = last_refresh_time_update.toJSON().toString();
     let last_refresh_time_convert = last_refresh_timeJSON_update.replaceAll( "T","").replaceAll("-","").replaceAll(":", "").slice(0, 14);
     
@@ -49,10 +45,11 @@ function make_get(player_id, first_call_time, hours, min) {
     let host = "http://localhost:8080";
     let data = {};
     data["player_id"] = player_id.toString();
-    data["start_time"] = first_call_time //.replace( "T" , "").replace("-", "").slice(0, 13);
-    data["last_refresh_time"] = last_refresh_time_convert //.replace( "T" , "" ).replace("-", "").slice(0, 13);
+    data["start_time"] = first_call_time; //.replace( "T" , "").replace("-", "").slice(0, 13);
+    data["last_refresh_time"] = last_refresh_time_convert; //.replace( "T" , "" ).replace("-", "").slice(0, 13);
     let json = JSON.stringify(data, null, 2);
     
+    console.log("Flag 1")
     xhttp.onload = function() {
         let response = JSON.parse(xhttp.responseText); //This woerks xhttp.responseText
         games_won += response.wins;
@@ -69,11 +66,13 @@ function make_get(player_id, first_call_time, hours, min) {
         console.log("Games Won from API call: " + response.wins);
         console.log("Games Played from API call: " + response.wins);
         document.getElementById("last_refresh_time").innerHTML = hours + ":" + min;
+        
     }
+        
+        xhttp.open("POST", host);
+        xhttp.setRequestHeader("Accept", "application/json");
+        xhttp.setRequestHeader("Content-Type", "application/json");
+        xhttp.send(json);
     
-    xhttp.open("POST", host);
-    xhttp.setRequestHeader("Accept", "application/json");
-    xhttp.setRequestHeader("Content-Type", "application/json");
-    xhttp.send(json);
-}
+}//end of make get function call
 

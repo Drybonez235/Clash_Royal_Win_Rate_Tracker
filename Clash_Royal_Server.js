@@ -81,7 +81,7 @@ const extract_data = (req, res, next) => {
     let start_time = req.body.start_time;
     //last refresh time is the last time a call was made subtracting 6 minutes. The reason it subtracts is because a game length
     //is up to 6 minutes long and any game played between start time and last call time needs to be captured.
-    let last_refresh_time =  req.body.last_refresh_time - 600;
+    let last_refresh_time =  req.body.last_refresh_time - 500;
     console.log("start time from website: " + req.body.start_time)
     console.log("last refresh time from website: " + req.body.last_refresh_time)
     
