@@ -42,14 +42,13 @@ function make_get(player_id, first_call_time) {
     let last_refresh_time_convert = last_refresh_timeJSON_update.replaceAll( "T","").replaceAll("-","").replaceAll(":", "").slice(0, 14);
     
     const xhttp = new XMLHttpRequest();
-    let host = "http://localhost:8080";
+    let host = "http://localhost:8090";
     let data = {};
     data["player_id"] = player_id.toString();
     data["start_time"] = first_call_time; //.replace( "T" , "").replace("-", "").slice(0, 13);
     data["last_refresh_time"] = last_refresh_time_convert; //.replace( "T" , "" ).replace("-", "").slice(0, 13);
     let json = JSON.stringify(data, null, 2);
     
-    console.log("Flag 1")
     xhttp.onload = function() {
         let response = JSON.parse(xhttp.responseText); //This woerks xhttp.responseText
         games_won += response.wins;
