@@ -13,8 +13,8 @@ function start(){
         if (player_id.charAt(0) != "#") {
             error.innerHTML = "Player ID must start with #";
         }
-        else if (player_id == "") {
-            error.innerHTML = "Player ID can't be blank!";
+        else if (player_id == "" || player_id.length < 5) {
+            error.innerHTML = "Player ID can't be blank and must be at least 5 charactors long!";
         }
         else{
             element.disabled = true;
