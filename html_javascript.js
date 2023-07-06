@@ -42,7 +42,7 @@ function make_get(player_id, first_call_time) {
     let last_refresh_time_convert = last_refresh_timeJSON_update.replaceAll( "T","").replaceAll("-","").replaceAll(":", "").slice(0, 14);
     
     const xhttp = new XMLHttpRequest();
-    let host = "http://localhost:8090";
+    let host = "3.89.163.68";
     let data = {};
     data["player_id"] = player_id.toString();
     data["start_time"] = first_call_time; //.replace( "T" , "").replace("-", "").slice(0, 13);
