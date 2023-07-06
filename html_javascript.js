@@ -22,7 +22,8 @@ function start(){
             document.getElementById("start").disabled = true;
             document.getElementById("time_variable").innerHTML = currentDate.getHours() + ":" + currentDate.getMinutes();
             //make_get(player_id.slice(1), currentDate_convert)
-            setInterval(function () {make_get(player_id.slice(1), currentDate_convert)}, 300000);
+            setInterval(function () {make_get(player_id.slice(1), currentDate_convert)}, 300000); //300000
+            //make_get(player_id.slice(1), currentDate_convert);
         }//end of else block
     }//end of start function
 
@@ -42,7 +43,7 @@ function make_get(player_id, first_call_time) {
     let last_refresh_time_convert = last_refresh_timeJSON_update.replaceAll( "T","").replaceAll("-","").replaceAll(":", "").slice(0, 14);
     
     const xhttp = new XMLHttpRequest();
-    let host = "3.89.163.68";
+    let host = "http://3.89.163.68:8080";
     let data = {};
     data["player_id"] = player_id.toString();
     data["start_time"] = first_call_time; //.replace( "T" , "").replace("-", "").slice(0, 13);

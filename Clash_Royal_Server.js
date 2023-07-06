@@ -38,7 +38,7 @@ const varify_user_id = (req, res, next) => {
 
 //This function makes the API call to gather the Clash Royal Player ID Game Logs
 const call_api = (req, res, next) => {
-    let token = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjZhOWY2M2FhLTBmMzItNDg0ZC1iMjFmLTljNzczMzBhNGE3ZSIsImlhdCI6MTY4ODY1MDUwOSwic3ViIjoiZGV2ZWxvcGVyL2IyNzdhNGUwLTcxMjUtNzZlYi0yNmViLTIzMjAwMGQzN2QzYSIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyIzLjg5LjE2My42OCJdLCJ0eXBlIjoiY2xpZW50In1dfQ.xuYOeZuv_bLW8U54l0C1WkEJI-7v7TWNkJvPa_d8ZWr1fpDLjyoy3UJRgC2Cd5Mxw5JyOm8pCXJ4OEuJbSX7EA";
+    let token = "Bearer ";//AWS
     
     const api_url_begin = "api.clashroyale.com";
     const api_url_end = "/v1/players/%23" + req.body.player_id  + "/battlelog";
