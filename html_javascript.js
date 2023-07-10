@@ -29,9 +29,8 @@ function start(){
             error.innerHTML="";
             document.getElementById("start").disabled = true;
             document.getElementById("time_variable").innerHTML = hours.slice(-2) + ":" + minutes.slice(-2);
-            //make_get(player_id.slice(1), currentDate_convert)
-            setInterval(function () {make_get(player_id.slice(1), currentDate_convert)}, 300000); //300000
-            //make_get(player_id.slice(1), currentDate_convert);
+            //setInterval(function () {make_get(player_id.slice(1), currentDate_convert)}, 300000); //300000
+        make_get(player_id.slice(1), currentDate_convert);
         }//end of else block
     }//end of start function
 
@@ -46,6 +45,15 @@ function make_get(player_id, first_call_time) {
     let last_refresh_time_update = new Date();
     let hours = "0" + last_refresh_time_update.getHours();
     let min = "0" + last_refresh_time_update.getMinutes();
+   
+    let seconds = 360;
+    let countdown = document.getElementById("countdown");
+    
+    setInterval(function () {
+        let sixty_secs = "0" + (seconds % 60);
+        countdown.innerHTML = Math.floor(seconds / 60) + ":" + sixty_secs.slice(-2);
+        seconds -= 1;
+    }, 1000);
     
     let last_refresh_timeJSON_update = last_refresh_time_update.toJSON().toString();
     let last_refresh_time_convert = last_refresh_timeJSON_update.replaceAll( "T","").replaceAll("-","").replaceAll(":", "").slice(0, 14);
