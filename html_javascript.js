@@ -1,5 +1,7 @@
 let games_played = 0;
 let games_won = 0;
+let seconds = 360
+let countdown = document.getElementById("countdown");
 
 //This function validates the player_id input and then calls the request function with the player id and time as parametrs.
 function start(){
@@ -12,7 +14,7 @@ function start(){
         console.log(string_name);
         let element = document.getElementById("player_id_input_field");
         let error = document.getElementById("player_id_error");
-        let player_id = element.value;
+        let player_id = element.value.trim();
         let currentDateJSON = currentDate.toJSON().toString();
         let currentDate_convert = currentDateJSON.replaceAll( "T","").replaceAll("-","").replaceAll(":", "").slice(0, 14);
         
@@ -29,6 +31,7 @@ function start(){
             error.innerHTML="";
             document.getElementById("start").disabled = true;
             document.getElementById("time_variable").innerHTML = hours.slice(-2) + ":" + minutes.slice(-2);
+            setInterval(function() {timer()}, 1000);
             setInterval(function () {make_get(player_id.slice(1), currentDate_convert)}, 300000); //300000
         //make_get(player_id.slice(1), currentDate_convert);
         }//end of else block
@@ -45,10 +48,6 @@ function make_get(player_id, first_call_time) {
     let last_refresh_time_update = new Date();
     let hours = "0" + last_refresh_time_update.getHours();
     let min = "0" + last_refresh_time_update.getMinutes();
-   
-    let seconds = 360;
-    let countdown = document.getElementById("countdown");
-    
   
     
     let last_refresh_timeJSON_update = last_refresh_time_update.toJSON().toString();
@@ -85,11 +84,16 @@ function make_get(player_id, first_call_time) {
         xhttp.setRequestHeader("Accept", "application/json");
         xhttp.setRequestHeader("Content-Type", "application/json");
         xhttp.send(json);
+        seconds = 360;
     
-//    setInterval(function () {
-//        let sixty_secs = "0" + (seconds % 60);
-//        countdown.innerHTML = Math.floor(seconds / 60) + ":" + sixty_secs.slice(-2);
-//        seconds -= 1;
-//    }, 1000);
 }//end of make get function call
+
+function timer(){ 
+           let sixty_secs = "0" + (seconds % 60);
+           countdown.innerHTML = Math.floor(seconds / 60) + ":" + sixty_secs.slice(-2);
+           seconds -= 1;
+           if(seconds == 0){
+            seconds = 360;
+           }
+       };
 
