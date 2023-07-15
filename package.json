@@ -1,0 +1,20 @@
+{
+  "name": "clash_royal_win_rate_tracker",
+  "version": "1.0.0",
+  "description": "An app for getting win rate info",
+  "main": "Clash_Royal_Server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "yes"
+  },
+  "author": "Jonathan Lewis",
+  "license": "ISC",
+  "dependencies": {
+    "date-and-time": "^3.0.0",
+    "express": "^4.18.2",
+    "tailwindscss": "0.3.0"
+  }
+}

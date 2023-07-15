@@ -1,50 +1,58 @@
 <!DOCTYPE HTML>
 <head>
-    <title>Clash Royal Win Rate Tracker</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Clash Royal Battle Tracker</title>
+    <link href="output.css" rel="stylesheet">
 </head>
-<body>
-    <div id="gradient">
-        <h1>Clash Royal Win Tracker</h1>
-        <h3>Input your name and player ID then press start!</h2>
-        <div id="player_info">
-            <div id="player_name_input">
-                <p id="player">Player:<p>
-                <input id="input_name" placeholder="name"></p>
+<body class="bg-black grid grid-cols-2 ml-8 h-auto">
+    <div id="left_side" class="flex-auto col-span-1">
+        <section class="mb-10">
+            <img src="clashroyale_assets/clashroyale_logo.png" class="object-contain h-72">
+            <h1 class="text-white text-6xl mt-0 ml-12 font-['copperplate']">~Battle Tracker</h1>
+        </section>
+        <section id="win_rate_info" class="grid-cols-1 grid-rows-3 text-4xl">
+            <div id="Net_Trophies" class="text-white block row-span-1 h-24">
+                <img src="clashroyale_assets/trophy.png.webp" class=" object-contain inline h-24 w-auto row-span-1">
+                <p class="text-white inline">Net Trophies:</p>
+                <p class="text-white inline">0</p>
             </div>
-            <div id="player_id_input">
-                <p id="player_id">Player ID:</p>
-                <input id="player_id_input_field" placeholder="#player tag">
-                <br><span id="player_id_error"><span>
+            <div id="battles_played" class="block row-span-1 h-24">
+                <img class="inline object-scale-down h-24 w-auto" src="clashroyale_assets/battle.png.webp">
+                <p class="text-white inline">Games played:</p>
+                <p id="games_played_int" class="text-white inline">0</p>
             </div>
-        </div>
-        <div id="fetched_info">
-            <div id="win_rate_input">
-                <p>Win Percentage:</p>
-                <p id="win_percentage">0</p>
+            <div id="win_rate" class="block row-span-1 h-24">
+                <img class="inline object-scale-down h-24 w-auto" src="clashroyale_assets/rank.png.webp">
+                <p class="text-white inline">Win Percentage:</p>
+                <p id="win_percentage" class="text-white inline">0</p>
             </div>
-            <div id="games_played_input">
-                <p>Games played:</p>
-                <p id="games_played_int">0</p>
-            </div>
-            <div id="games_won_input">
-                <p>Games won:</p>
-                <p id="games_won_int">0</p>
-            </div>
-            <!-- Write your comments here -->
-            <div id="time">
-                <p>Start time: </p>
-                <p id="time_variable">00:00</p><br>
-                <p>Last Refresh time: </p>
-                <p id="last_refresh_time">00:00</p><br>
-                <p id="countdown_text">Next Refresh: </p>
-                <p id="countdown">00:00</p>
-            </div>
-        </div>
+        </section>
+        <section id="buttons" class="h-24">
+            <button onclick="start()" id="start" class="text-black bg-white h-16 w-48 px-6 m-2 text-lg rounded-lg hover:bg-red-400">Start</button>
+            <button onclick="refresh()" id="refresh" class="text-black bg-white h-12 w-36 px-5 m-2 rounded-md hover:bg-blue-300">Reset</button>
+        </section>
     </div>
-        <div id="buttons">
-           <button onclick="start()" id="start">Start</button>
-           <button onclick="refresh()" id="refresh">Reset</button>
-        </div>
+    <div id="right_side" class="flex-auto col-span-1">
+        <section id="player_info" class="text-black text-2xl p-3 bg-white m-8 container w-auto h-2/5 rounded-l border-t-4 border-b-4 border-l-2 border-r-4 border-gray-400">
+                <div id="player_name_input" class="block">
+                    <p class="inline" id="player">Player:</p>
+                    <input class="inline border-2 pl-2 rounded-lg mb-2 border-gray-400" id="input_name" placeholder="name">
+                </div>
+                <div class="block h-24" id="player_id_input">
+                    <p id="player_id" class="inline">Player ID:</p>
+                    <input class="inline border-2 pl-2 rounded-lg mb-2 border-gray-400"id="player_id_input_field" placeholder="#player tag"> 
+                    <p class="text-red-600 text-sm" id="player_id_error"></p>
+                </div>
+            <div class="block mt-20">
+                <p class="inline">Start time: </p>
+                <p class="inline" id="time_variable">00:00</p></div>
+            <div class="block">
+                <p class="inline">Last Refresh time: </p>
+                <p class="inline" id="last_refresh_time">00:00</p>
+            </div>
+        </section>
+    </div>
+    <footer class="h-12">
+        <p class="text-white text-xs">This material is unofficial and is not endorsed by Supercell. For more information see Supercell's Fan Content Policy: www.supercell.com/fan-content-policy.</p>
+    </footer>
     <script src="html_javascript.js"></script>
 </body>
