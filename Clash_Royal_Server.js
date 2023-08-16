@@ -5,7 +5,7 @@ const https =  require("https");
 
 //Initializing the express app, hostname, and port number.
 const app = express();
-const hostname = '3.89.163.68';
+const hostname = "localhost//8080" //'3.89.163.68'; Amaozn ip address
 const port = 8080;
 
 
@@ -94,12 +94,15 @@ const extract_data = (req, res, next) => {
         
         if((start_time <= battle_time) && (last_refresh_time <= battle_time)){
             game_total += 1;
+            console.log("This should only happen 1-2 times per call")
             //This if statement checks the number of crowns. If you you had more crowns then your opponent, a win is added.
             if(your_crowns > opponent_crowns){
                 win_total += 1
-                console.log("you won!")
                 }//end of win in
             }//end of time match if statment
+            else{
+              break;
+            }
         }//end of the for loop
     //the server sends back a json response with win total and game total. These numbers are added to the website.
     res.send({ wins: win_total, games : game_total})

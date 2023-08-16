@@ -1,14 +1,18 @@
-const currentDate = new Date()
 let games_played = 0;
 let games_won = 0;
+let seconds = 300
+let countdown = document.getElementById("countdown");
+let last_refresh_time_string;
 
 //This function validates the player_id input and then calls the request function with the player id and time as parametrs.
 function start(){
+        let shown_player_name = document.getElementById("player");
+        let get_player_name = document.getElementById("input_name");
+        const string_name = get_player_name.value;
+        console.log(string_name);
         let element = document.getElementById("player_id_input_field");
         let error = document.getElementById("player_id_error");
-        let player_id = element.value;
-        let currentDateJSON = currentDate.toJSON().toString();
-        let currentDate_convert = currentDateJSON.replaceAll( "T","").replaceAll("-","").replaceAll(":", "").slice(0, 14);
+        let player_id = element.value.trim();
         
         if (player_id.charAt(0) != "#") {
             error.innerHTML = "Player ID must start with #";
@@ -17,13 +21,22 @@ function start(){
             error.innerHTML = "Player ID can't be blank and must be at least 5 charactors long!";
         }
         else{
+            const currentDate = new Date()
+            let hours = "0" + currentDate.getHours();
+            let minutes = "0" + currentDate.getMinutes();
+            let currentDateJSON = currentDate.toJSON().toString();
+            let currentDate_convert = currentDateJSON.replaceAll("T", "").replaceAll("-", "").replaceAll(":", "").slice(0, 14);
+            shown_player_name.innerHTML = "Player: " + string_name;
+            get_player_name = get_player_name.remove();
             element.disabled = true;
-            error.innerHTML="";
+            error.innerHTML = "";
+            last_refresh_time_string = currentDate_convert;
             document.getElementById("start").disabled = true;
-            document.getElementById("time_variable").innerHTML = currentDate.getHours() + ":" + currentDate.getMinutes();
-            //make_get(player_id.slice(1), currentDate_convert)
-            setInterval(function () {make_get(player_id.slice(1), currentDate_convert)}, 300000); //300000
-            //make_get(player_id.slice(1), currentDate_convert);
+            document.getElementById("time_variable").innerHTML = hours.slice(-2) + ":" + minutes.slice(-2);
+            setInterval(function () { timer() }, 1000);
+            //requestAnimationFrame(timer);
+            setInterval(function () { make_get(player_id.slice(1), currentDate_convert) }, 300000); //300000
+        //make_get(player_id.slice(1), currentDate_convert);
         }//end of else block
     }//end of start function
 
@@ -36,18 +49,17 @@ function refresh() {
 function make_get(player_id, first_call_time) {
     
     let last_refresh_time_update = new Date();
-    let hours = last_refresh_time_update.getHours();
-    let min = last_refresh_time_update.getMinutes();
-    
+    let hours = "0" + last_refresh_time_update.getHours();
+    let min = "0" + last_refresh_time_update.getMinutes();
     let last_refresh_timeJSON_update = last_refresh_time_update.toJSON().toString();
     let last_refresh_time_convert = last_refresh_timeJSON_update.replaceAll( "T","").replaceAll("-","").replaceAll(":", "").slice(0, 14);
     
     const xhttp = new XMLHttpRequest();
-    let host = "http://3.89.163.68:8080";
+    let host = "http://3.89.163.68:8080";// amazon database.
     let data = {};
     data["player_id"] = player_id.toString();
     data["start_time"] = first_call_time; //.replace( "T" , "").replace("-", "").slice(0, 13);
-    data["last_refresh_time"] = last_refresh_time_convert; //.replace( "T" , "" ).replace("-", "").slice(0, 13);
+    data["last_refresh_time"] =  last_refresh_time_string; //.replace( "T" , "" ).replace("-", "").slice(0, 13);
     let json = JSON.stringify(data, null, 2);
     
     xhttp.onload = function() {
@@ -58,16 +70,23 @@ function make_get(player_id, first_call_time) {
         document.getElementById("games_won_int").innerHTML = games_won;
         
         if(games_played != 0){
-            win_percentage = ((games_won/games_played).toFixed(2)) * 100;
+            win_percentage = ((games_won/games_played) * 100).toFixed(2);
             document.getElementById("win_percentage").innerHTML = win_percentage + "%";
-        }
+        } 
+        let last_refresh_time_update = new Date();
+        let hours = "0" + last_refresh_time_update.getHours();
+        let min = "0" + last_refresh_time_update.getMinutes();
+        let last_refresh_timeJSON_update = last_refresh_time_update.toJSON().toString();
+        let last_refresh_time_convert = last_refresh_timeJSON_update.replaceAll( "T","").replaceAll("-","").replaceAll(":", "").slice(0, 14);
+        last_refresh_time_string = last_refresh_time_convert;
         console.log("start time: " + first_call_time);
         console.log("last refresh time: " + last_refresh_time_convert);
         console.log("Games Won from API call: " + response.wins);
-        console.log("Games Played from API call: " + response.wins);
-        document.getElementById("last_refresh_time").innerHTML = hours + ":" + min;
-        
+        console.log("Games Played from API call: " + response.games);
+        document.getElementById("last_refresh_time").innerHTML = hours.slice(-2) + ":" + min.slice(-2);
+        seconds = 300;   
     }
+        
         
         xhttp.open("POST", host);
         xhttp.setRequestHeader("Accept", "application/json");
@@ -75,4 +94,13 @@ function make_get(player_id, first_call_time) {
         xhttp.send(json);
     
 }//end of make get function call
+
+function timer(){ 
+           let sixty_secs = "0" + (seconds % 60);
+           countdown.innerHTML = Math.floor(seconds / 60) + ":" + sixty_secs.slice(-2);
+           seconds -= 1;
+           if(seconds == 0){
+            seconds = 300;
+           }
+       };
 
