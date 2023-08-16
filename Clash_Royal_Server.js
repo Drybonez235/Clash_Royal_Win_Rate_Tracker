@@ -98,7 +98,6 @@ const extract_data = (req, res, next) => {
             //This if statement checks the number of crowns. If you you had more crowns then your opponent, a win is added.
             if(your_crowns > opponent_crowns){
                 win_total += 1
-                console.log("you won!")
                 }//end of win in
             }//end of time match if statment
             else{
