@@ -16,13 +16,13 @@ This current version works using localhost.
   * Reset Button
 
 ## Setup
+This can be done with a local host or running an E2C instance.
 
-### Localhost and Browser
-This version runs on your local host. You will need a computer that can run a server through terminal and an internet browser. 
 ### node.js
 Node.js Version 18.16.0
 ### Clash Royal API
 A Clash Royal Develper account to produce an API token placed as an Authorization bearer token header.
+
 ### Instructions
 Create the required Clash Royal API token and make an API token.
 Download this repository to a folder.
